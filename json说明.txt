@@ -1,0 +1,27 @@
+[
+    {
+      "camera_id":"0",//cameraId,一般情况下后置镜头为0，前置镜头为1
+      "usbDeviceId":2005,//usb相机的id
+      "inputUrl": "rtsp://admin:aidlux123@192.168.110.90:8554",
+      "inputFormat":"video/avc",//取值为"video/avc"(即h264)或者"video/hevc"(即h265),可以不写，默认值为"video/avc"
+      "inputResizeWidth": 480,
+      "inputResizeHeight": 320,
+      "outUrl": "rtsp://192.168.110.98:8445/il",
+      "outPath":"/sdcard/Download/"
+      "outFrameRate": 25,
+      "outWidth": 480,
+      "outHeight": 320
+    }
+  ]
+
+inputUrl：输入rtsp地址
+camera_id：前后置id
+usbDeviceId：usb相机Id
+inputFormat：拉流格式
+inputResizeWidth：解码后图片的压缩宽度
+inputResizeHeight：解码后图片的压缩高度
+outUrl：推流的地址
+outPath：存储地址
+outFrameRate：编码的帧率
+outWidth：编码后输出视频的宽度
+outHeight：编码后输出视频的高度

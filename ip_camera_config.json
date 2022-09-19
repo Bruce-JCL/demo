@@ -1,0 +1,18 @@
+[
+  {
+    "inputUrl": "rtsp://admin:plm2897376@192.168.0.107:554/h265/ch1/main/av_stream",
+    "inputFormat": "video/hevc"
+  },
+  {
+    "inputUrl": "rtsp://admin:plm2897376@192.168.0.107:554/h265/ch1/main/av_stream",
+    "inputFormat": "video/hevc"
+  },
+  {
+    "inputUrl": "rtsp://admin:plm2897376@192.168.0.107:554/h265/ch1/main/av_stream",
+    "inputFormat": "video/hevc"
+  },
+  {
+    "inputUrl": "rtsp://admin:plm2897376@192.168.0.107:554/h265/ch1/main/av_stream",
+    "inputFormat": "video/hevc"
+  }
+]
