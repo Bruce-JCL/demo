@@ -1,0 +1,42 @@
+[
+  {
+    "inputUrl": "rtsp://admin:aidlux123@192.168.110.199:554/h265/ch1/main/av_stream",
+    "inputFormat": "video/hevc",
+    "outUrl": "rtmp://127.0.0.1:1935/a",
+    "outFrameRate": 25,
+    "inputResizeWidth": 960,
+    "inputResizeHeight": 540,
+    "outWidth": 960,
+    "outHeight": 540
+  },
+  {
+    "inputUrl": "rtsp://admin:aidlux123@192.168.110.199:554/h265/ch1/main/av_stream",
+    "inputFormat": "video/hevc",
+    "outUrl": "rtmp://127.0.0.1:1935/b",
+    "outFrameRate": 25,
+    "inputResizeWidth": 960,
+    "inputResizeHeight": 540,
+    "outWidth": 960,
+    "outHeight": 540
+  },
+  {
+    "inputUrl": "rtsp://admin:aidlux123@192.168.110.199:554/h265/ch1/main/av_stream",
+    "inputFormat": "video/hevc",
+    "outUrl": "rtmp://127.0.0.1:1935/c",
+    "outFrameRate": 25,
+    "inputResizeWidth": 960,
+    "inputResizeHeight": 540,
+    "outWidth": 960,
+    "outHeight": 540
+  },
+  {
+    "inputUrl": "rtsp://admin:aidlux123@192.168.110.199:554/h265/ch1/main/av_stream",
+    "inputFormat": "video/hevc",
+    "outUrl": "rtmp://127.0.0.1:1935/d",
+    "outFrameRate": 25,
+    "inputResizeWidth": 960,
+    "inputResizeHeight": 540,
+    "outWidth": 960,
+    "outHeight": 540
+  }
+]

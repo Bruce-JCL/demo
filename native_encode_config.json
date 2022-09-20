@@ -1,0 +1,11 @@
+[
+    {
+        "camera_id":0,
+        "outUrl": "rtmp://127.0.0.1:1935/a",
+        "outFrameRate": 25,
+        "inputResizeWidth": 1920,
+        "inputResizeHeight": 1080,
+        "outWidth": 1920,
+        "outHeight": 1080
+    }
+]

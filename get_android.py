@@ -13,20 +13,22 @@ import aidlite_gpu
 from multiprocessing import Process, sharedctypes
 from ssd_mobilenet_utils import preprocess_image_for_tflite_uint8, non_max_suppression, draw_ssd_result
 from utils_movenet import draw_result, movenetDecode
-configs, kv_shows = [], []
+configs, kv_shows,kv_encode= [], [],[]
 shareArrays, boxesArrays, boxesArrays, = [], [], []
 showW=0
 showH=0
 numChan=1
 pools = []
+type=0
 
 
 
-def androidOb(path,type,width,height,num):
-    global showW,showH,numChan
+def androidOb(path,ty,width,height,num):
+    global showW,showH,numChan,type
     showW=width
     showH=height
     numChan=num
+    type=ty
     print("showW",showW,"showH",showH,"numChan",numChan)
     droid = android.Android()
     jsonStr=""
@@ -55,14 +57,15 @@ def run(funC):
             boxesArrays.append(sharedctypes.RawArray(ctypes.c_int16, 17*2))
         configs.append("/tmp/mmkv/tmp_ipc_rtsp"+str(i))
         kv_shows.append(Aashmem("/tmp/mmkv/tmp_ipc_display_" + str(i)))
+        kv_encode.append(Aashmem("/tmp/mmkv/tmp_ipc_es_rtsp" + str(i)))
         pools.append(Process(target = input_worker, args = (i,funC,)))
     pools.append(Process(target = funC,args=(0,)))
-    time.sleep(2)
+    time.sleep(3)
         # 开始运行
     for p in pools:
         p.start()
 
-# get 16 rtsp streamer to sharememory and show the streamer
+
 def input_worker(video_id,funC):
     res = configs[video_id]
     input_men = np.frombuffer(shareArrays[video_id], dtype=ctypes.c_uint8).reshape(showH, showW, 3)
@@ -72,8 +75,8 @@ def input_worker(video_id,funC):
         out_men = np.frombuffer(boxesArrays[video_id], dtype=ctypes.c_int16).reshape(17, 2)
     kv = Aashmem(res) 
     print(res)
-    num = 0
     l = int.from_bytes(kv.get_bytes(4, 0), byteorder='little')
+    encode_trip=0
     while l==0:
         l = int.from_bytes(kv.get_bytes(4, 0), byteorder='little')
         time.sleep(0.005)
@@ -94,8 +97,13 @@ def input_worker(video_id,funC):
             img = draw_result(img, out_men)
         binput = img.tobytes()
         print(len(binput))
-        kv_shows[video_id].set_bytes(len(binput).to_bytes(4, byteorder='little', signed=True), 4, 0)
-        kv_shows[video_id].set_bytes(binput, len(binput), 4)
+        if type==0 or type==1 or type==4 or type==6:
+            kv_shows[video_id].set_bytes(len(binput).to_bytes(4, byteorder='little', signed=True), 4, 0)
+            kv_shows[video_id].set_bytes(binput, len(binput), 4)
+        elif type==2 or type==3 or type==5:
+            kv_encode[video_id].set_bytes(len(binput).to_bytes(4, byteorder='little', signed=True), 4, 0)
+            kv_encode[video_id].set_bytes(encode_trip.to_bytes(4, byteorder='little', signed=True), 4, 4)
+            kv_encode[video_id].set_bytes(binput, len(binput), 8)
 
 # detect per frame of rtsp streamer...
 def ai_worker1(ind):
