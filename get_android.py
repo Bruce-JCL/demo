@@ -75,6 +75,7 @@ def input_worker(video_id,funC):
         out_men = np.frombuffer(boxesArrays[video_id], dtype=ctypes.c_int16).reshape(17, 2)
     kv = Aashmem(res) 
     print(res)
+    m=0
     l = int.from_bytes(kv.get_bytes(4, 0), byteorder='little')
     encode_trip=0
     while l==0:
@@ -96,14 +97,18 @@ def input_worker(video_id,funC):
         elif funC==ai_worker2:
             img = draw_result(img, out_men)
         binput = img.tobytes()
-        print(len(binput))
         if type==0 or type==1 or type==4 or type==6:
             kv_shows[video_id].set_bytes(len(binput).to_bytes(4, byteorder='little', signed=True), 4, 0)
             kv_shows[video_id].set_bytes(binput, len(binput), 4)
         elif type==2 or type==3 or type==5:
+            m=m+1
+            print(m)
+            if m==1000:
+                encode_trip=2
             kv_encode[video_id].set_bytes(len(binput).to_bytes(4, byteorder='little', signed=True), 4, 0)
             kv_encode[video_id].set_bytes(encode_trip.to_bytes(4, byteorder='little', signed=True), 4, 4)
             kv_encode[video_id].set_bytes(binput, len(binput), 8)
+            encode_trip=0
 
 # detect per frame of rtsp streamer...
 def ai_worker1(ind):
