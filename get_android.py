@@ -103,7 +103,7 @@ def input_worker(video_id,funC):
         elif type==2 or type==3 or type==5:
             m=m+1
             print(m)
-            if m==1000:
+            if m==500:
                 encode_trip=2
             kv_encode[video_id].set_bytes(len(binput).to_bytes(4, byteorder='little', signed=True), 4, 0)
             kv_encode[video_id].set_bytes(encode_trip.to_bytes(4, byteorder='little', signed=True), 4, 4)

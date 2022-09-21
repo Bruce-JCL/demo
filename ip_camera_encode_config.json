@@ -13,7 +13,8 @@
   {
     "inputUrl": "rtsp://admin:aidlux123@192.168.110.199:554/h265/ch1/main/av_stream",
     "inputFormat": "video/hevc",
-    "outUrl": "rtmp://127.0.0.1:1935/b",
+    "outFormat":"video/hevc",
+    "outUrl": "rtsp://127.0.0.1:8554/b",
     "outFrameRate": 25,
     "inputResizeWidth": 960,
     "inputResizeHeight": 540,
@@ -23,6 +24,7 @@
   {
     "inputUrl": "rtsp://admin:aidlux123@192.168.110.199:554/h265/ch1/main/av_stream",
     "inputFormat": "video/hevc",
+    "outFormat":"video/hevc",
     "outUrl": "rtsp://127.0.0.1:8554/c",
     "outFrameRate": 25,
     "inputResizeWidth": 960,

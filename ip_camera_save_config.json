@@ -12,7 +12,9 @@
     {
         "inputUrl": "rtsp://admin:aidlux123@192.168.110.199:554/h265/ch1/main/av_stream",
         "inputFormat": "video/hevc",
-        "outUrl": "rtsp://127.0.0.1:8554/b",
+        "outFormat":"video/hevc",
+        "outPath":"/sdcard/Download/rtsp-h265-b.mp4",
+        "outUrl": "rtsp://127.0.0.1:8554/rtsp-h265-b",
         "outFrameRate": 25,
         "inputResizeWidth": 960,
         "inputResizeHeight": 540,
@@ -22,8 +24,8 @@
     {
         "inputUrl": "rtsp://admin:aidlux123@192.168.110.199:554/h265/ch1/main/av_stream",
         "inputFormat": "video/hevc",
-        "outUrl": "rtsp://127.0.0.1:8554/c",
-        "outPath":"/sdcard/Download/test1.mp4",
+        "outUrl": "rtsp://127.0.0.1:8554/rtsp-h264-c",
+        "outPath":"/sdcard/Download/rtsp-h264-c.mp4",
         "outFrameRate": 25,
         "inputResizeWidth": 960,
         "inputResizeHeight": 540,
@@ -33,8 +35,8 @@
     {
         "inputUrl": "rtsp://admin:aidlux123@192.168.110.199:554/h265/ch1/main/av_stream",
         "inputFormat": "video/hevc",
-        "outUrl": "rtmp://127.0.0.1:1935/d",
-        "outPath":"/sdcard/Download/test2.mp4",
+        "outUrl": "rtmp://127.0.0.1:1935/rtmp-d",
+        "outPath":"/sdcard/Download/rtmp-d.mp4",
         "outFrameRate": 25,
         "inputResizeWidth": 960,
         "inputResizeHeight": 540,
