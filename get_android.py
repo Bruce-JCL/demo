@@ -19,16 +19,16 @@ showW=0
 showH=0
 numChan=1
 pools = []
-type=0
+typeAnd=0
 
 
 
 def androidOb(path,ty,width,height,num):
-    global showW,showH,numChan,type
+    global showW,showH,numChan,typeAnd
     showW=width
     showH=height
     numChan=num
-    type=ty
+    typeAnd=ty
     print("showW",showW,"showH",showH,"numChan",numChan)
     droid = android.Android()
     jsonStr=""
@@ -37,7 +37,7 @@ def androidOb(path,ty,width,height,num):
     print("pid",pid)
     with open(path,'r', encoding='utf-8') as js:
         jsonStr=js.read()
-        ret = droid.stream(jsonStr,type,pid)
+        ret = droid.stream(jsonStr,typeAnd,pid)
         result=json.loads(ret.result)
         print(result)
         if result["ret"]!=0:
@@ -64,7 +64,9 @@ def run(funC):
         # 开始运行
     for p in pools:
         p.start()
+        
 
+    
 
 def input_worker(video_id,funC):
     res = configs[video_id]
@@ -97,10 +99,11 @@ def input_worker(video_id,funC):
         elif funC==ai_worker2:
             img = draw_result(img, out_men)
         binput = img.tobytes()
-        if type==0 or type==1 or type==4 or type==6:
+        print("img0",type(img),typeAnd)
+        if typeAnd==0 or typeAnd==1 or typeAnd==4 or typeAnd==6:
             kv_shows[video_id].set_bytes(len(binput).to_bytes(4, byteorder='little', signed=True), 4, 0)
             kv_shows[video_id].set_bytes(binput, len(binput), 4)
-        elif type==2 or type==3 or type==5:
+        elif typeAnd==2 or typeAnd==3 or typeAnd==5:
             m=m+1
             print(m)
             if m==500:
@@ -109,6 +112,9 @@ def input_worker(video_id,funC):
             kv_encode[video_id].set_bytes(encode_trip.to_bytes(4, byteorder='little', signed=True), 4, 4)
             kv_encode[video_id].set_bytes(binput, len(binput), 8)
             encode_trip=0
+        elif typeAnd==7:
+            print("img",type(img))
+            cv2.imshow("image", img)
 
 # detect per frame of rtsp streamer...
 def ai_worker1(ind):
