@@ -79,6 +79,7 @@ def input_worker(video_id,funC):
     print(res)
     m=0
     l = int.from_bytes(kv.get_bytes(4, 0), byteorder='little')
+    print("len",l)
     encode_trip=0
     while l==0:
         l = int.from_bytes(kv.get_bytes(4, 0), byteorder='little')
@@ -99,7 +100,7 @@ def input_worker(video_id,funC):
         elif funC==ai_worker2:
             img = draw_result(img, out_men)
         binput = img.tobytes()
-        print("img0",type(img),typeAnd)
+        # print("img0",type(img),typeAnd)
         if typeAnd==0 or typeAnd==1 or typeAnd==4 or typeAnd==6:
             kv_shows[video_id].set_bytes(len(binput).to_bytes(4, byteorder='little', signed=True), 4, 0)
             kv_shows[video_id].set_bytes(binput, len(binput), 4)
@@ -113,8 +114,10 @@ def input_worker(video_id,funC):
             kv_encode[video_id].set_bytes(binput, len(binput), 8)
             encode_trip=0
         elif typeAnd==7:
-            print("img",type(img))
+            # print("img",type(img))
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             cv2.imshow("image", img)
+            cv2.waitKey(1)
 
 # detect per frame of rtsp streamer...
 def ai_worker1(ind):

@@ -12,7 +12,7 @@ import get_android
 #原生推流
 # get_android.androidOb("native_encode_config.json",5,1920,1080,1)
 #file解析wayland显示
-get_android.androidOb("file_config.json",7,1920,1078,1)
+get_android.androidOb("file_config.json",7,1920,1088,1)
 #算法1
 get_android.run(get_android.ai_worker1)
 #算法2
