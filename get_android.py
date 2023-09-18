@@ -113,11 +113,12 @@ def input_worker(video_id,funC):
             kv_encode[video_id].set_bytes(encode_trip.to_bytes(4, byteorder='little', signed=True), 4, 4)
             kv_encode[video_id].set_bytes(binput, len(binput), 8)
             encode_trip=0
-        elif typeAnd==7:
+        elif typeAnd==7 or typeAnd==8:
             # print("img",type(img))
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             cv2.imshow("image", img)
             cv2.waitKey(1)
+            # print("hello")
 
 # detect per frame of rtsp streamer...
 def ai_worker1(ind):
